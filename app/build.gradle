@@ -1,5 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
-
+plugins {
+    id "org.sonarqube" version "7.3.0.8198"
+}
 buildscript {
     repositories {
         jcenter()
@@ -20,4 +22,11 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+sonar {
+    properties {
+        property "sonar.projectKey", "GuinaF2_WifiIndoorPositioningSystem"
+        property "sonar.organization", "guinaf2"
+    }
 }
