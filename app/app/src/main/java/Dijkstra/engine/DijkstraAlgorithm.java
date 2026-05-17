@@ -58,7 +58,6 @@ public class DijkstraAlgorithm {
             }
 
     }
-
     private int getDistance(Vertex node, Vertex target) {
             for (Edge edge : edges) {
                     if (edge.getSource().equals(node)
