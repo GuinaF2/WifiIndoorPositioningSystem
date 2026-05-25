@@ -43,11 +43,14 @@ task jacocoTestReport(type: JacocoReport, dependsOn: 'testDebugUnitTest') {
         html.enabled = true
     }
 
-    // Define a árvore dos arquivos compilados
-    def fileFilter = ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']
-    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: fileFilter)
+    // 1. Mapeia os arquivos compilados (onde o bytecode reside)
+    def debugTree = fileTree(dir: "${buildDir}/intermediates/classes/debug", 
+                             excludes: ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*'])
     
+    // 2. Mapeia a RAIZ dos seus pacotes (Onde começa o 'com')
     sourceDirectories = files("${project.projectDir}/src/main/java")
-    classDirectories = files(fileTree(dir: "${buildDir}/intermediates/classes/debug", excludes: ['**/R.class', '**/R$*.class', '**/BuildConfig.*', '**/Manifest*.*', '**/*Test*.*', 'android/**/*.*']))
+    classDirectories = files([debugTree])
+    
+    // 3. O arquivo de execução (o "rastreador" dos testes)
     executionData = files("${buildDir}/jacoco/testDebugUnitTest.exec")
 }
