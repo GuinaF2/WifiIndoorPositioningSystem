@@ -13,6 +13,8 @@ jobs:
     steps:
     - name: Baixando o repositório
       uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Necessário para o Sonar analisar o histórico do repositório
 
     - name: Configurando o Java 8 (Crucial para o Gradle 2016)
       uses: actions/setup-java@v3
@@ -28,3 +30,15 @@ jobs:
 
     - name: Limpeza, Testes Unitários e Relatório JaCoCo
       run: ./gradlew clean testDebugUnitTest jacocoTestReport
+
+    - name: Análise Estática no SonarCloud
+      uses: SonarSource/sonarcloud-github-action@master
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      with:
+        args: >
+          -Dsonar.projectKey=COLOQUE_SUA_CHAVE_AQUI
+          -Dsonar.organization=COLOQUE_SUA_ORG_AQUI
+          -Dsonar.java.binaries=app/build/intermediates/classes/debug
+          -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
