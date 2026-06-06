@@ -1,4 +1,4 @@
-name: SonarQube - CI Pipeline Legado - Testes e Cobertura
+name: CI Pipeline Legado - Testes e Cobertura
 
 on:
   push:
@@ -19,6 +19,9 @@ jobs:
       with:
         java-version: '8'
         distribution: 'temurin'
+
+    - name: Exorcizando arquivos fantasmas do Windows
+      run: find . -name "local.properties" -type f -delete
 
     - name: Dando permissão de execução ao Gradle
       run: chmod +x gradlew
