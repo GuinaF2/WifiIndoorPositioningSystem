@@ -38,7 +38,7 @@ jobs:
         SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
       with:
         args: >
-          -Dsonar.projectKey=COLOQUE_SUA_CHAVE_AQUI
-          -Dsonar.organization=COLOQUE_SUA_ORG_AQUI
+          -Dsonar.projectKey=GuinaF2_WifiIndoorPositioningSystem
+          -Dsonar.organization=guinaf2
           -Dsonar.java.binaries=app/build/intermediates/classes/debug
           -Dsonar.coverage.jacoco.xmlReportPaths=app/build/reports/jacoco/jacocoTestReport/jacocoTestReport.xml
