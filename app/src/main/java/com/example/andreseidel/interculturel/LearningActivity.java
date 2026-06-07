@@ -70,7 +70,7 @@ public class LearningActivity extends AppCompatActivity {
             tv.setText("" + e.getLocalizedMessage());
         }
     }
-
+    //Empty function, not able to explain it
     private void saveRoomsInfo() throws RoomWithoutNameException {
     }
 
