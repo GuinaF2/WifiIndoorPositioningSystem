@@ -2,9 +2,9 @@ name: CI Pipeline Legado - Testes e Cobertura
 
 on:
   push:
-    branches: [ "master" ]
+    branches: [ "master", "develop", "master-estavel" ]
   pull_request:
-    branches: [ "master" ]
+    branches: [ "master", "develop", "master-estavel" ]
 
 jobs:
   build-and-test:
